@@ -18,6 +18,12 @@ Welcome to the Cloakfusion API documentation! You can use our API to access Cloa
 
 We have language bindings in Shell, Ruby, and Python! You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.
 
+### Formatting
+
+Parameter | Default | Description
+--------- | ------- | -----------
+format=json | true | If set , the result will be returned as JSON.
+format=api | false | If set , the result will be returned as HTML.
 
 # Authentication
 
@@ -37,17 +43,13 @@ api = kittn.authorize('meowmeowmeow')
 
 ```shell
 # With shell, you can just pass the correct header with each request
-curl "api_endpoint_here"
-  -H "Authorization: meowmeowmeow"
+curl -X GET https://my.cloakfusion.com/api/v1/vhosts/ -H 'Authorization: Token 9944b09199c62bcf9418ad846dd0e4bbdfc6ee4b'
 ```
 
-> Make sure to replace `meowmeowmeow` with your API key.
+> Make sure to replace `9944b09199c62bcf9418ad846dd0e4bbdfc6ee4b` with the real token.
 
-Cloakfusion uses API keys to allow access to the API. You can register a new Cloakfusion API key at our [developer portal](http://example.com/developers).
-
-Cloakfusion expects for the API key to be included in all API requests to the server in a header that looks like the following:
-
-`Authorization: meowmeowmeow`
+For clients to authenticate, the token key should be included in the Authorization HTTP header. The key should be prefixed by the string literal "Token", with whitespace separating the two strings.
+You can register a new Cloakfusion API key at our [portal](https://my.cloakfusion.com).
 
 <aside class="notice">
 You must replace <code>meowmeowmeow</code> with your personal API key.
@@ -78,15 +80,30 @@ curl "api_endpoint_here"
 
 > Make sure to replace `meowmeowmeow` with your API key.
 
-Cloakfusion uses API keys to allow access to the API. You can register a new Cloakfusion API key at our [developer portal](http://example.com/developers).
+This endpoint allows you to retrieve information about vhosts.
 
-Cloakfusion expects for the API key to be included in all API requests to the server in a header that looks like the following:
+### GET
 
-`Authorization: meowmeowmeow`
+This method lists all vhosts.
 
-<aside class="notice">
-You must replace <code>meowmeowmeow</code> with your personal API key.
-</aside>
+`GET https://my.cloakfusion.com/api/v1/vhosts/`
+
+
+### POST
+
+This method allows you to create and update? vhosts.
+
+`POST https://my.cloakfusion.com/api/v1/vhosts/`
+
+### Query Parameters
+
+Parameter | Required | Description
+--------- | ------- | -----------
+domain_name | true | References the CDN vhost. This is the hostname the user would browse to to retrieve files.
+name | true | Nice name by which user can identify the vhost (no functional purpose).
+origin_url | true | URL that references the origin. Where the CDN will get the content fromContains protocol, domain name (fqdn), port (optional) and the full path.
+
+
 
 # Vhostproperty
 
@@ -112,15 +129,30 @@ curl "api_endpoint_here"
 
 > Make sure to replace `meowmeowmeow` with your API key.
 
-Cloakfusion uses API keys to allow access to the API. You can register a new Cloakfusion API key at our [developer portal](http://example.com/developers).
+This endpoint allows you to retrieve and modify specific vhost properties.
 
-Cloakfusion expects for the API key to be included in all API requests to the server in a header that looks like the following:
+### GET
 
-`Authorization: meowmeowmeow`
+This method lists all vhost properties.
 
-<aside class="notice">
-You must replace <code>meowmeowmeow</code> with your personal API key.
-</aside>
+`GET https://my.cloakfusion.com/api/v1/vhostsproperty/`
+
+### POST
+
+This method allows you to create and update? vhosts.
+
+`POST https://my.cloakfusion.com/api/v1/vhosts/`
+
+### Query Parameters
+
+Parameter | Required | Description
+--------- | ------- | -----------
+cname | false | The hostname to which you link your domain e.g. foo.cdn.warpcache.com
+ttl | true | Indicates the lifetime (in seconds) of the DNS record
+gzip | false | Boolean. If enabled, the CDNs will be set to compress objects
+ssl | false | Indicates whether a vhost is also available on SSL
+override_hostheader | false | By default the Host header used to retrieve objects from origin is the origin hostname. Set to TRUE to use the name of the vhost in requests to origin
+host_header | false | Allows you to specify the Host header to be used in requests to origin
 
 
 # Flush
@@ -147,15 +179,19 @@ curl "api_endpoint_here"
 
 > Make sure to replace `meowmeowmeow` with your API key.
 
-Cloakfusion uses API keys to allow access to the API. You can register a new Cloakfusion API key at our [developer portal](http://example.com/developers).
+With this endpoint you can create a request to flush or purge an object.
 
-Cloakfusion expects for the API key to be included in all API requests to the server in a header that looks like the following:
+### POST
 
-`Authorization: meowmeowmeow`
+This method allows you to create a purge request
 
-<aside class="notice">
-You must replace <code>meowmeowmeow</code> with your personal API key.
-</aside>
+`POST https://my.cloakfusion.com/api/v1/flush/`
+
+### Query Parameters
+
+Parameter | Required | Description
+--------- | ------- | -----------
+urls | true | The URL of the object you want to flush
 
 
 # Flushstatus
@@ -182,15 +218,21 @@ curl "api_endpoint_here"
 
 > Make sure to replace `meowmeowmeow` with your API key.
 
-Cloakfusion uses API keys to allow access to the API. You can register a new Cloakfusion API key at our [developer portal](http://example.com/developers).
+Use this to retrieve the status of your flushes
 
-Cloakfusion expects for the API key to be included in all API requests to the server in a header that looks like the following:
+### POST
 
-`Authorization: meowmeowmeow`
+This method allows you to request the status of a purge request
 
-<aside class="notice">
-You must replace <code>meowmeowmeow</code> with your personal API key.
-</aside>
+`POST https://my.cloakfusion.com/api/v1/flushstatus/`
+
+### Query Parameters
+
+Parameter | Required | Description
+--------- | ------- | -----------
+filenames | true | The names of the objects (regex)
+vhosts | true | The vhost you want to retrieve the information for
+
 
 
 # Traffic
@@ -217,15 +259,21 @@ curl "api_endpoint_here"
 
 > Make sure to replace `meowmeowmeow` with your API key.
 
-Cloakfusion uses API keys to allow access to the API. You can register a new Cloakfusion API key at our [developer portal](http://example.com/developers).
+Get information on the traffic
 
-Cloakfusion expects for the API key to be included in all API requests to the server in a header that looks like the following:
+### POST
 
-`Authorization: meowmeowmeow`
+This method allows you to request the status of a purge request
 
-<aside class="notice">
-You must replace <code>meowmeowmeow</code> with your personal API key.
-</aside>
+`GET https://my.cloakfusion.com/api/v1/traffic/`
+
+### Query Parameters
+
+Parameter | Required | Description
+--------- | ------- | -----------
+foo | bar | foobar
+
+
 
 # Examples
 
