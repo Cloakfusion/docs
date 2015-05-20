@@ -3,8 +3,8 @@ title: API Reference
 
 language_tabs:
   - shell
-  - ruby
   - python
+  - php
 
 includes:
   - errors
@@ -28,12 +28,6 @@ format=api | false | If set , the result will be returned as HTML.
 # Authentication
 
 > To authorize, use this code:
-
-```ruby
-require 'kittn'
-
-api = Cloakfusion::APIClient.authorize!('meowmeowmeow')
-```
 
 ```python
 import kittn
@@ -60,11 +54,6 @@ You must replace <code>meowmeowmeow</code> with your personal API key.
 
 > To authorize, use this code:
 
-```ruby
-require 'kittn'
-
-api = Cloakfusion::APIClient.authorize!('meowmeowmeow')
-```
 
 ```python
 import kittn
@@ -109,11 +98,6 @@ origin_url | true | URL that references the origin. Where the CDN will get the c
 
 > To authorize, use this code:
 
-```ruby
-require 'kittn'
-
-api = Cloakfusion::APIClient.authorize!('meowmeowmeow')
-```
 
 ```python
 import kittn
@@ -159,11 +143,6 @@ host_header | false | Allows you to specify the Host header to be used in reques
 
 > To authorize, use this code:
 
-```ruby
-require 'kittn'
-
-api = Cloakfusion::APIClient.authorize!('meowmeowmeow')
-```
 
 ```python
 import kittn
@@ -198,11 +177,6 @@ urls | true | The URL of the object you want to flush
 
 > To authorize, use this code:
 
-```ruby
-require 'kittn'
-
-api = Cloakfusion::APIClient.authorize!('meowmeowmeow')
-```
 
 ```python
 import kittn
@@ -239,12 +213,6 @@ vhosts | true | The vhost you want to retrieve the information for
 
 > To authorize, use this code:
 
-```ruby
-require 'kittn'
-
-api = Cloakfusion::APIClient.authorize!('meowmeowmeow')
-```
-
 ```python
 import kittn
 
@@ -278,13 +246,6 @@ foo | bar | foobar
 # Examples
 
 ## Get All Kittens
-
-```ruby
-require 'kittn'
-
-api = Cloakfusion::APIClient.authorize!('meowmeowmeow')
-api.kittens.get
-```
 
 ```python
 import kittn
