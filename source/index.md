@@ -59,7 +59,7 @@ format=xml | false | If set , the result will be returned as XML.
 
 # Vhost
 
-> To authorize, use this code:
+> To get vhost information, use this code:
 
 
 ```python
@@ -132,7 +132,7 @@ This method lists all vhost properties.
 
 This method allows you to create and update? vhosts.
 
-`POST https://my.cloakfusion.com/api/v1/vhosts/`
+`POST https://my.cloakfusion.com/api/v1/vhostsproperty/`
 
 ### Query Parameters
 
