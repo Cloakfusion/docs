@@ -4,7 +4,7 @@ title: Cloakfusion API Reference
 language_tabs:
   - shell
   - python
-  - php
+
 
 includes:
   - errors
@@ -12,25 +12,22 @@ includes:
 search: true
 ---
 
-# Introduction!!!!
+# Getting started
 
 Welcome to the Cloakfusion API documentation! You can use our API to access Cloakfusion API endpoints, which can help you create, update and delete properties. You can also retrieve information about the data usage of your properties.
 
-We have language bindings in Shell, Ruby, and Python! You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.
+We have language bindings in Shell, and Python. You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.
 
-### Formatting
-
-Parameter | Default | Description
---------- | ------- | -----------
-format=json | true | If set , the result will be returned as JSON.
-format=api | false | If set , the result will be returned as HTML.
+Our API uses an API token or your login session from our management portal. To obtain an API token, please send an email to tech_contact[at]cloakfusion.com.
 
 # Authentication
+
+Authentication is managed via either cookies or an API token. As stated above, obtaining a token can be done by sending an email to tech_contact[at]cloakfusion.com. If you're logged in on our management portal, you don't have to do anything specific to access the API.
 
 > To authorize, use this code:
 
 ```python
-import kittn
+import requests
 
 api = kittn.authorize('meowmeowmeow')
 ```
@@ -48,6 +45,16 @@ You can register a new Cloakfusion API key at our [portal](https://my.cloakfusio
 <aside class="notice">
 You must replace <code>meowmeowmeow</code> with your personal API key.
 </aside>
+
+### Formatting
+
+Our API supports multiple formatting types:
+
+Parameter | Default | Description
+--------- | ------- | -----------
+format=json | true | If set , the result will be returned as JSON.
+format=api | false | If set , the result will be returned as HTML.
+format=xml | false | If set , the result will be returned as XML.
 
 
 # Vhost
