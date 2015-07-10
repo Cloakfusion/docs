@@ -278,7 +278,7 @@ curl "/api/v1/vhosts/" \
 ]
 ```
 
-Lists of all vhost property objects.
+List of all vhost property objects.
 
 `GET https://my.cloakfusion.com/api/v1/vhost_property/`
 
