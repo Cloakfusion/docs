@@ -31,16 +31,20 @@ property | A 'vhost' for a domain name. E.g.: static.cdn.warpcache.com
 vhost | An entry in our multi-cdn solution for a domain name. E.g.: static.cdn.warpcache.com
 origin | The url that contains files that will be pulled & cached by CDN's. E.g. http://o.mysite.com
 domain name | The url which you can use to pull your files through the multi-cdn solution. E.g. http://cdn.mysite.com
+flush | API representation of a flush/purge request to connected CDN providers to clear cache for an object
+purge | See flush
 
 ### Formatting
 
+API formatting can be manipulated through the format query parameter.
+
 Our API supports multiple formatting types:
 
-Parameter | Default | Description
---------- | ------- | -----------
-format=json | true | If set , the result will be returned as JSON.
-format=api | false | If set , the result will be returned as HTML.
-format=xml | false | If set , the result will be returned as XML.
+Parameter | Value | Default | Description
+--------- | ----- | ------- | -----------
+format | json | true | If set , the result will be returned as JSON.
+format | api | false | If set , the result will be returned as HTML.
+format | xml | false | If set , the result will be returned as XML.
 
 
 
@@ -80,7 +84,7 @@ You should replace <code>YOUR_API_TOKEN</code> with your personal API key of cou
 
 This endpoint allows you to retrieve, create and update information about vhosts.
 
-## GET
+## LIST
 
 ```python
 
@@ -125,7 +129,7 @@ Returns a list of with vhost data objects.
 `GET https://my.cloakfusion.com/api/v1/vhosts/`
 
 
-## GET One
+## GET
 
 ```python
 
@@ -203,7 +207,7 @@ curl "/api/v1/vhosts/" \
 { "domain_name" : "apidocs.cloakfusion.com",
   "id" : 2,
   "name" : "api",
-  "origin_url" : "https://storage.googleapis.com/api_docs/index.html",
+  "origin_url" : "http://storage.cloakfusion.com/api_docs/index.html",
   "profile" : { "id" : 2,
       "name" : "Standard"
     },
@@ -225,10 +229,10 @@ When a request for the vhost id(`2` in this case) doesn't yield a cname record, 
 
 `POST https://my.cloakfusion.com/api/v1/vhosts/`
 
-### Query Parameters
+### Post Parameters
 
 Parameter | Required | Description
---------- | ------- | -----------
+--------- | -------- | -----------
 domain_name | true | References the CDN vhost. This is the hostname the user would browse to to retrieve files.
 name | true | Nice name by which user can identify the vhost (no functional purpose).
 origin_url | true | URL that references the origin. Where the CDN will get the content fromContains protocol, domain name (fqdn), port (optional) and the full path.
@@ -238,7 +242,7 @@ origin_url | true | URL that references the origin. Where the CDN will get the c
 # Vhost property
 
 
-## GET
+## LIST
 
 ```python
 
@@ -282,7 +286,7 @@ List of all vhost property objects.
 
 `GET https://my.cloakfusion.com/api/v1/vhost_property/`
 
-## GET One
+## GET
 
 ```python
 
@@ -364,7 +368,7 @@ This method allows you to update vhosts properties.
 ### Query Parameters
 
 Parameter | Required | Description
---------- | ------- | -----------
+--------- | -------- | -----------
 cname | false | The hostname to which you link your domain e.g. foo.cdn.warpcache.com
 ttl | false | Indicates the lifetime (in seconds) of the DNS record
 gzip | false | Boolean. If enabled, the CDNs will be set to compress objects
@@ -376,28 +380,157 @@ host_header | false | Allows you to specify the Host header to be used in reques
 
 # Flush
 
-> To authorize, use this code:
 
+With this endpoint you can create a request to flush / purge an object from all connected cdn's.
+
+<aside class="notice">You can flush the URL's that you're using on your properties. E.g.:<br/>
+<table>
+    <tr><td>domain name</td><td>cdn.example.com</td></tr>
+    <tr><td>origin</td><td>http://o.example.com</td><tr/>
+    <tr><td>label</td><td>mycompany</td></tr>
+</table>
+Will let you flush on http://cdn.example.com/file_to_flush.png
+</aside>
+
+
+## LIST
 
 ```python
-import kittn
 
-api = kittn.authorize('meowmeowmeow')
+""" Assuming we keep our api and base_url
+variables from the authentication example: """
+
+url = base_url + 'vhost_property/'
+new_vhost = api.get(url).json()
 ```
 
 ```shell
 # With shell, you can just pass the correct header with each request
-curl "api_endpoint_here"
-  -H "Authorization: meowmeowmeow"
+curl "/api/v1/vhosts/" \
+  -H "Authorization: YOUR_API_TOKEN" \
 ```
 
-> Make sure to replace `meowmeowmeow` with your API key.
+> Example response:
 
-With this endpoint you can create a request to flush or purge an object from all connected cdn's.
+```json
+
+{
+  "count": 2,
+  "next": null,
+  "previous": null,
+  "results": [
+    {
+      "id": 2,
+      "flushes": [
+        2
+      ],
+      "urls": [
+        "http://cdn.example.com/selfie.jpg",
+        "http://cdn.example.com/team_photo.jpg"
+      ],
+      "owner": 1
+    },
+    {
+      "id": 1,
+      "flushes": [
+        1
+      ],
+      "urls": [
+        "http://cdn.example.com/selfie.jpg"
+      ],
+      "owner": 1
+    },
+]
+```
+
+List of all flushes from your organization.
+
+`GET https://my.cloakfusion.com/api/v1/flush/`
+
+## GET
+
+```python
+
+""" Assuming we keep our api and base_url
+variables from the authentication example: """
+
+flush_id = 1
+my_flush = api.get(url+'flush/' + flush_id)
+
+```
+
+```shell
+# With shell, you can just pass the correct header with each request
+curl "/api/v1/vhost_property/1" \
+  -H "Authorization: YOUR_API_TOKEN" \
+```
+
+> Example response:
+
+```json
+
+{
+  "id": 1,
+  "flushes": [
+    1
+  ],
+  "urls": [
+    "http://static-cloakfusion.cdn.warpcache.com/api.txt"
+  ],
+  "owner": 1
+}
+
+```
+
+Show vhost property object for vhost id `id`.
+
+`GET https://my.cloakfusion.com/api/v1/flush/` `id` /
 
 ## POST
 
-This method allows you to create a purge request
+```python
+
+""" Assuming we keep our api and base_url
+variables from the authentication example: """
+
+import json
+my_flush = api.post(url+'flush/', data=json.dumps(
+    {
+        'urls': [
+            "http://static-cloakfusion.cdn.warpcache.com/test.txt"
+        ]
+    }),
+    headers={
+        'Content-Type': 'application/json'
+    }
+)
+
+```
+
+```shell
+# With shell, you can just pass the correct header with each request
+curl "/api/v1/vhost_property/1" \
+  -H "Authorization: YOUR_API_TOKEN" \
+```
+
+> Example response:
+
+```json
+{
+  "id": 1,
+  "flushes": [
+    1
+  ],
+  "urls": [
+    "http://static-cloakfusion.cdn.warpcache.com/api.txt"
+  ],
+  "owner": 1
+}
+
+```
+
+This method allows you to create a flush request
+<aside class="success">Don't forget to set the `Content-Type` header to `application/json`</aside>
 
 `POST https://my.cloakfusion.com/api/v1/flush/`
 
@@ -410,171 +543,243 @@ urls | true | The URL of the object you want to flush
 
 # Flushstatus
 
-> To authorize, use this code:
-
-
-```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-```
-
-```shell
-# With shell, you can just pass the correct header with each request
-curl "api_endpoint_here"
-  -H "Authorization: meowmeowmeow"
-```
-
-> Make sure to replace `meowmeowmeow` with your API key.
 
 Use this to retrieve the status of your flushes
 
-### POST
+## LIST
 
-This method allows you to request the status of a purge request
+```python
 
-`POST https://my.cloakfusion.com/api/v1/flushstatus/`
+""" Assuming we keep our api and base_url
+variables from the authentication example: """
 
-### Query Parameters
+url = base_url + 'flushstatus/'
+flushstatusses = api.get(url).json()
 
-Parameter | Required | Description
---------- | ------- | -----------
-filenames | true | The names of the objects (regex)
-vhosts | true | The vhost you want to retrieve the information for
+```
+
+> Example response:
+
+```json
+
+[
+  {
+    "url": "http://my.cloakfusion.com/api/v1/flush/2/",
+    "id": "http://my.cloakfusion.com/api/v1/flushstatus/2/",
+    "flushrequest": 2,
+    "error": "one or more cdns have failed to flush",
+    "result": {
+      "ready": true,
+      "total": 2,
+      "done": 2,
+      "results": [
+        [
+          "CDN Provider",
+          "flushed"
+        ],
+        [
+          "CDN Provider 2",
+          "flushed"
+        ]
+      ]
+    },
+    "state": "failed",
+    "filenames": "[u'/test.txt', '/api.txt']",
+    "created": "2015-07-13T08:49:03Z",
+    "updated": "2015-07-13T08:49:04Z",
+    "vhost": "http://my.cloakfusion.com/api/v1/vhosts/1/"
+  },
+  {
+    "url": "http://my.cloakfusion.com/api/v1/flush/1/",
+    "id": "http://my.cloakfusion.com/api/v1/flushstatus/1/",
+    "flushrequest": 1,
+    "error": "",
+    "result": {
+      "ready": true,
+      "total": 1,
+      "done": 2,
+      "results": [
+        [
+          "CDN Provider",
+          "flushed"
+        ],
+        [
+          "CDN Provider 2",
+          "flushed"
+        ]
+      ]
+    },
+    "state": "finished",
+    "filenames": "[u'/test.txt']",
+    "created": "2015-07-13T08:50:45Z",
+    "updated": "2015-07-13T08:50:46Z",
+    "vhost": "http://my.cloakfusion.com/api/v1/vhosts/1/"
+  }
+]
+
+```
+
+Retrieves a list of status/details for a flush request.
+
+`GET https://my.cloakfusion.com/api/v1/flushstatus/`
+
+
+## GET
+
+```python
+
+""" Assuming we keep our api and base_url
+variables from the authentication example: """
+
+url = base_url + 'flushstatus/2/'
+flushstatus = api.get(url).json()
+
+```
+
+> Example response:
+
+```json
+
+{
+  "url": "http://my.cloakfusion.com/api/v1/flush/2/",
+  "id": "http://my.cloakfusion.com/api/v1/flushstatus/2/",
+  "flushrequest": 2,
+  "error": "one or more cdns have failed to flush",
+  "result": {
+    "ready": true,
+    "total": 2,
+    "done": 2,
+    "results": [
+      [
+        "CDN Provider",
+        "flushed"
+      ],
+      [
+        "CDN Provider 2",
+        "flushed"
+      ]
+    ]
+  },
+  "state": "failed",
+  "filenames": "[u'/test.txt', '/api.txt']",
+  "created": "2015-07-13T08:49:03Z",
+  "updated": "2015-07-13T08:49:04Z",
+  "vhost": "http://my.cloakfusion.com/api/v1/vhosts/1/"
+}
+
+```
+
+Retrieves a single status/detail report for a flush request.
+
+`GET https://my.cloakfusion.com/api/v1/flushstatus/`
 
 
 # Traffic
 
-> To authorize, use this code:
+
+Get information on traffic usage
+
+## LIST
 
 ```python
-import kittn
 
-api = kittn.authorize('meowmeowmeow')
+""" Assuming we keep our api and base_url
+variables from the authentication example: """
+
+url = base_url + 'traffic/'
+traffic = api.get(url).json()
+
 ```
 
-```shell
-# With shell, you can just pass the correct header with each request
-curl "api_endpoint_here"
-  -H "Authorization: meowmeowmeow"
+> Example response:
+
+```json
+
+[
+    {
+        "usage": "1262.93",
+        "quantity": "gb",
+        "text": "1262.93 gb",
+        "vhost": {
+            "domain_name": "static-cloakfusion.cdn.warpcache.com",
+            "id": 1,
+            "name": "static",
+            "origin_url": "http://o.cloakfusion.com",
+            "state": "active",
+            "url": "http://my.cloakfusion.com/api/v1/vhosts/1/",
+            "properties": [],
+            "profile": {
+                "name": "Standard",
+                "id": 2
+            }
+        }
+    },
+    {
+        "usage": "1262.93",
+        "quantity": "gb",
+        "text": "1262.93 gb",
+        "vhost": {
+            "domain_name": "cdn.example.com",
+            "id": 2,
+            "name": "mycompany",
+            "origin_url": "http://o.example.com",
+            "state": "active",
+            "url": "http://my.cloakfusion.com/api/v1/vhosts/2/",
+            "properties": [],
+            "profile": {
+                "name": "Standard",
+                "id": 2
+            }
+        }
+    }
+]
+
 ```
 
-> Make sure to replace `meowmeowmeow` with your API key.
-
-Get information on the traffic
-
-### POST
-
-This method allows you to request the status of a purge request
+This method allows you to request the status of a flush request
 
 `GET https://my.cloakfusion.com/api/v1/traffic/`
+
+## GET
+
+```python
+
+{
+    "usage": "1262.93",
+    "quantity": "gb",
+    "text": "1262.93 gb",
+    "vhost": {
+        "domain_name": "static-cloakfusion.cdn.warpcache.com",
+        "id": 1,
+        "name": "static",
+        "origin_url": "http://o.cloakfusion.com",
+        "state": "active",
+        "url": "http://my.cloakfusion.com/api/v1/vhosts/1/",
+        "properties": [],
+        "profile": {
+            "name": "Standard",
+            "id": 2
+        }
+    }
+}
+
+```
+
+Retrieve usage for one vhost
+
+`GET https://my.cloakfusion.com/api/v1/traffic/` `id` /
+
+<aside class="success">
+Where id = vhost id
+</aside>
 
 ### Query Parameters
 
 Parameter | Required | Description
 --------- | ------- | -----------
-foo | bar | foobar
+start_date | false | Start date for fetching traffic usage. Format: dd-mm-yyyy
+end_date | false | End date for fetching traffic usage. Format: dd-mm-yyyy
 
 
 
-# Examples
-
-## Get All Kittens
-
-```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-api.kittens.get()
-```
-
-```shell
-curl "http://example.com/api/kittens"
-  -H "Authorization: meowmeowmeow"
-```
-
-> The above command returns JSON structured like this:
-
-```json
-[
-  {
-    "id": 1,
-    "name": "Fluffums",
-    "breed": "calico",
-    "fluffiness": 6,
-    "cuteness": 7
-  },
-  {
-    "id": 2,
-    "name": "Isis",
-    "breed": "unknown",
-    "fluffiness": 5,
-    "cuteness": 10
-  }
-]
-```
-
-This endpoint retrieves all kittens.
-
-### HTTP Request
-
-`GET http://example.com/api/kittens`
-
-### Query Parameters
-
-Parameter | Default | Description
---------- | ------- | -----------
-include_cats | false | If set to true, the result will also include cats.
-available | true | If set to false, the result will include kittens that have already been adopted.
-
-<aside class="success">
-Remember — a happy kitten is an authenticated kitten!
-</aside>
-
-## Get a Specific Kitten
-
-```ruby
-require 'kittn'
-
-api = Cloakfusion::APIClient.authorize!('meowmeowmeow')
-api.kittens.get(2)
-```
-
-```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-api.kittens.get(2)
-```
-
-```shell
-curl "http://example.com/api/kittens/2"
-  -H "Authorization: meowmeowmeow"
-```
-
-> The above command returns JSON structured like this:
-
-```json
-{
-  "id": 2,
-  "name": "Isis",
-  "breed": "unknown",
-  "fluffiness": 5,
-  "cuteness": 10
-}
-```
-
-This endpoint retrieves a specific kitten.
-
-<aside class="warning">If you're not using an administrator API key, note that some kittens will return 403 Forbidden if they are hidden for admins only.</aside>
-
-### HTTP Request
-
-`GET http://example.com/kittens/<ID>`
-
-### URL Parameters
-
-Parameter | Description
---------- | -----------
-ID | The ID of the kitten to retrieve
 
