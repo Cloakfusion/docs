@@ -120,7 +120,7 @@ curl "/api/v1/vhosts/" \
           "ttl" : 3600
         } ],
     "state" : "in_progress",
-    "url" : "http://my.cloakfusion.com/api/v1/vhosts/1/"
+    "url" : "https://my.cloakfusion.com/api/v1/vhosts/1/"
   } ]
 ```
 
@@ -167,7 +167,7 @@ curl "/api/v1/vhosts/1" \
         "ttl" : 3600
       } ],
   "state" : "in_progress",
-  "url" : "http://my.cloakfusion.com/api/v1/vhosts/1/"
+  "url" : "https://my.cloakfusion.com/api/v1/vhosts/1/"
 }
 ```
 
@@ -213,7 +213,7 @@ curl "/api/v1/vhosts/" \
     },
   "properties" : [  ],
   "state" : "in_progress",
-  "url" : "http://my.cloakfusion.com/api/v1/vhosts/2/"
+  "url" : "https://my.cloakfusion.com/api/v1/vhosts/2/"
 }
 
 ```
@@ -754,7 +754,7 @@ This method allows you to request the status of a flush request
         "name": "static",
         "origin_url": "http://o.cloakfusion.com",
         "state": "active",
-        "url": "http://my.cloakfusion.com/api/v1/vhosts/1/",
+        "url": "https://my.cloakfusion.com/api/v1/vhosts/1/",
         "properties": [],
         "profile": {
             "name": "Standard",
