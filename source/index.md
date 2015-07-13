@@ -50,7 +50,7 @@ format | xml | false | If set , the result will be returned as XML.
 
 # Authentication
 
-Authentication is managed via either cookies or an API token. As stated above, obtaining a token can be done by sending an email to tech_contact[at]cloakfusion.com. If you're logged in on our management portal, you don't have to do anything specific to access the API.
+Authentication is managed via either cookies or an API token. As stated above, obtaining a token can be done by sending an email to support[at]cloakfusion.com. If you're logged in on our management portal, you don't have to do anything specific to access the API.
 
 ```python
 
@@ -224,7 +224,7 @@ Note that vhost creation doesn't immediately return the cname record.<br/><br/>
 It may take up to <b>30 seconds</b> before you will get a cname in the vhost response.
 
 
-When a request for the vhost id(`2` in this case) doesn't yield a cname record, please contact tech_contact[at]cloakfusion.com and provide the vhost id, origin url and domain name.
+When a request for the vhost id(`2` in this case) doesn't yield a cname record, please contact support[at]cloakfusion.com and provide the vhost id, origin url and domain name.
 </aside>
 
 `POST https://my.cloakfusion.com/api/v1/vhosts/`
@@ -363,7 +363,7 @@ curl "/api/v1/vhost_property/1" \
 
 This method allows you to update vhosts properties.
 
-`PUT https://my.cloakfusion.com/api/v1/vhost_property/` `id` /
+`PUT https://my.cloakfusion.com/api/v1/vhost_property/ ` `id` /
 
 ### Query Parameters
 
