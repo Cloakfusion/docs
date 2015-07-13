@@ -137,8 +137,7 @@ Returns a list of with vhost data objects.
 variables from the authentication example: """
 
 vhost_id = 1
-url = base_url + 'vhost_property/' + vhost_id
-url = base_url + 'vhost/'
+url = base_url + 'vhost/' + vhost_id
 vhosts = api.get(url).json()
 ```
 
@@ -383,14 +382,17 @@ host_header | false | Allows you to specify the Host header to be used in reques
 
 With this endpoint you can create a request to flush / purge an object from all connected cdn's.
 
-<aside class="notice">You can flush the URL's that you're using on your properties. E.g.:<br/>
-<table>
-    <tr><td>domain name</td><td>cdn.example.com</td></tr>
-    <tr><td>origin</td><td>http://o.example.com</td><tr/>
-    <tr><td>label</td><td>mycompany</td></tr>
-</table>
-Will let you flush on http://cdn.example.com/file_to_flush.png
-</aside>
+
+
+<aside class="notice">You can flush the URLs that you're using on your properties. Given the following setup</aside>
+ | |
+ --- | ------
+Domain name | **cdn.mysite.com**
+Origin url | http://o.mysite.com |
+Label | mycompany
+Cname | mycompany.cdn.warpcache.com
+
+Will let you flush on the domain name http:// **cdn.mysite.com** /
 
 
 ## LIST
@@ -400,7 +402,7 @@ Will let you flush on http://cdn.example.com/file_to_flush.png
 """ Assuming we keep our api and base_url
 variables from the authentication example: """
 
-url = base_url + 'vhost_property/'
+url = base_url + 'flush/'
 new_vhost = api.get(url).json()
 ```
 
@@ -461,7 +463,7 @@ my_flush = api.get(url+'flush/' + flush_id)
 
 ```shell
 # With shell, you can just pass the correct header with each request
-curl "/api/v1/vhost_property/1" \
+curl "/api/v1/flush/1" \
   -H "Authorization: YOUR_API_TOKEN" \
 ```
 
@@ -509,7 +511,7 @@ my_flush = api.post(url+'flush/', data=json.dumps(
 
 ```shell
 # With shell, you can just pass the correct header with each request
-curl "/api/v1/vhost_property/1" \
+curl "/api/v1/flush/1" \
   -H "Authorization: YOUR_API_TOKEN" \
 ```
 
@@ -534,7 +536,7 @@ This method allows you to create a flush request
 
 `POST https://my.cloakfusion.com/api/v1/flush/`
 
-### Query Parameters
+### Post Parameters
 
 Parameter | Required | Description
 --------- | ------- | -----------
@@ -736,7 +738,7 @@ traffic = api.get(url).json()
 
 ```
 
-This method allows you to request the status of a flush request
+Lists all usage for all vhosts
 
 `GET https://my.cloakfusion.com/api/v1/traffic/`
 
