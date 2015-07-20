@@ -14,7 +14,7 @@ search: true
 
 # Getting started
 
-Welcome to the Cloakfusion API documentation! You can use our API to access API endpoints, which can help you create, update and delete [properties](#glossary). You can also retrieve information about the data usage of your properties.
+Welcome to the Cloakfusion API documentation! You can use our API to access API endpoints, which can help you create, update and delete properties. You can also retrieve information about the data usage of your properties.
 
 We have language bindings in Shell, and Python. You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.
 
@@ -29,8 +29,8 @@ Keyword | Definition
 CDN | A Content Delivery Network. We use multiple to guarantee 100% uptime
 property | A 'vhost' for a domain name. E.g.: static.cdn.warpcache.com
 vhost | An entry in our multi-cdn solution for a domain name. E.g.: static.cdn.warpcache.com
-origin | The url that contains files that will be pulled & cached by CDN's. E.g. http://o.mysite.com
-domain name | The url which you can use to pull your files through the multi-cdn solution. E.g. http://cdn.mysite.com
+origin | The url that contains files that will be pulled & cached by CDN's. E.g. http://o.example.com
+domain name | The url which you can use to pull your files through the multi-cdn solution. E.g. http://cdn.example.com
 flush | API representation of a flush/purge request to connected CDN providers to clear cache for an object
 purge | See flush
 
@@ -238,7 +238,7 @@ origin_url | true | URL that references the origin. Where the CDN will get the c
 
 
 
-# Vhost property
+# Vhostproperty
 
 
 ## LIST
@@ -387,12 +387,12 @@ With this endpoint you can create a request to flush / purge an object from all 
 <aside class="notice">You can flush the URLs that you're using on your properties. Given the following setup</aside>
  | |
  --- | ------
-Domain name | **cdn.mysite.com**
-Origin url | http://o.mysite.com |
-Label | mycompany
-Cname | mycompany.cdn.warpcache.com
+Domain name | **cdn.example.com**
+Origin url | http://o.example.com |
+Label | example
+Cname | example.cdn.warpcache.com
 
-Will let you flush on the domain name http:// **cdn.mysite.com** /
+Will let you flush on the domain name http:// **cdn.example.com** /
 
 
 ## LIST
