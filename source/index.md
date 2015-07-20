@@ -104,14 +104,14 @@ curl "/api/v1/vhosts/" \
 > Example response:
 
 ```json
-[ { "domain_name" : "static-cloakfusion.cdn.warpcache.com",
+[ { "domain_name" : "example.cdn.warpcache.com",
     "id" : 1,
     "name" : "static_cloak",
     "origin_url" : "https://www.cloakfusion.com",
     "profile" : { "id" : 2,
         "name" : "Standard"
       },
-    "properties" : [ { "cname" : "static-cloakfusion.cdn.warpcache.com",
+    "properties" : [ { "cname" : "example.cdn.warpcache.com",
           "gzip" : true,
           "host_header" : "",
           "id" : 1,
@@ -150,14 +150,14 @@ curl "/api/v1/vhosts/1" \
 > Example response:
 
 ```json
-{ "domain_name" : "static-cloakfusion.cdn.warpcache.com",
+{ "domain_name" : "example.cdn.warpcache.com",
   "id" : 1,
   "name" : "static_cloak",
   "origin_url" : "https://www.cloakfusion.com",
   "profile" : { "id" : 2,
       "name" : "Standard"
     },
-  "properties" : [ { "cname" : "static-cloakfusion.cdn.warpcache.com",
+  "properties" : [ { "cname" : "example.cdn.warpcache.com",
         "gzip" : true,
         "host_header" : "",
         "id" : 1,
@@ -270,7 +270,7 @@ curl "/api/v1/vhosts/" \
     "ssl" : false,
     "ttl" : 300
   },
-  { "cname" : "static-cloakfusion.cdn.warpcache.com",
+  { "cname" : "example.cdn.warpcache.com",
     "gzip" : true,
     "host_header" : "",
     "id" : 1,
@@ -307,7 +307,7 @@ curl "/api/v1/vhostproperty/1" \
 
 ```json
 
-{ "cname" : "static-cloakfusion.cdn.warpcache.com",
+{ "cname" : "example.cdn.warpcache.com",
   "gzip" : true,
   "host_header" : "",
   "id" : 1,
@@ -349,7 +349,7 @@ curl "/api/v1/vhostproperty/1" \
 
 ```json
 
-{ "cname" : "static-cloakfusion.cdn.warpcache.com",
+{ "cname" : "example.cdn.warpcache.com",
   "gzip" : true,
   "host_header" : "",
   "id" : 1,
@@ -477,7 +477,7 @@ curl "/api/v1/flush/1" \
     1
   ],
   "urls": [
-    "http://static-cloakfusion.cdn.warpcache.com/api.txt"
+    "http://example.cdn.warpcache.com/api.txt"
   ],
   "owner": 1
 }
@@ -499,7 +499,7 @@ import json
 my_flush = api.post(url+'flush/', data=json.dumps(
     {
         'urls': [
-            "http://static-cloakfusion.cdn.warpcache.com/test.txt"
+            "http://example.cdn.warpcache.com/test.txt"
         ]
     }),
     headers={
@@ -524,7 +524,7 @@ curl "/api/v1/flush/1" \
     1
   ],
   "urls": [
-    "http://static-cloakfusion.cdn.warpcache.com/api.txt"
+    "http://example.cdn.warpcache.com/api.txt"
   ],
   "owner": 1
 }
@@ -566,8 +566,8 @@ flushstatusses = api.get(url).json()
 
 [
   {
-    "url": "http://my.cloakfusion.com/api/v1/flush/2/",
-    "id": "http://my.cloakfusion.com/api/v1/flushstatus/2/",
+    "url": "https://my.cloakfusion.com/api/v1/flush/2/",
+    "id": "https://my.cloakfusion.com/api/v1/flushstatus/2/",
     "flushrequest": 2,
     "error": "one or more cdns have failed to flush",
     "result": {
@@ -589,11 +589,11 @@ flushstatusses = api.get(url).json()
     "filenames": "[u'/test.txt', '/api.txt']",
     "created": "2015-07-13T08:49:03Z",
     "updated": "2015-07-13T08:49:04Z",
-    "vhost": "http://my.cloakfusion.com/api/v1/vhosts/1/"
+    "vhost": "https://my.cloakfusion.com/api/v1/vhosts/1/"
   },
   {
-    "url": "http://my.cloakfusion.com/api/v1/flush/1/",
-    "id": "http://my.cloakfusion.com/api/v1/flushstatus/1/",
+    "url": "https://my.cloakfusion.com/api/v1/flush/1/",
+    "id": "https://my.cloakfusion.com/api/v1/flushstatus/1/",
     "flushrequest": 1,
     "error": "",
     "result": {
@@ -615,7 +615,7 @@ flushstatusses = api.get(url).json()
     "filenames": "[u'/test.txt']",
     "created": "2015-07-13T08:50:45Z",
     "updated": "2015-07-13T08:50:46Z",
-    "vhost": "http://my.cloakfusion.com/api/v1/vhosts/1/"
+    "vhost": "https://my.cloakfusion.com/api/v1/vhosts/1/"
   }
 ]
 
@@ -643,8 +643,8 @@ flushstatus = api.get(url).json()
 ```json
 
 {
-  "url": "http://my.cloakfusion.com/api/v1/flush/2/",
-  "id": "http://my.cloakfusion.com/api/v1/flushstatus/2/",
+  "url": "https://my.cloakfusion.com/api/v1/flush/2/",
+  "id": "https://my.cloakfusion.com/api/v1/flushstatus/2/",
   "flushrequest": 2,
   "error": "one or more cdns have failed to flush",
   "result": {
@@ -666,7 +666,7 @@ flushstatus = api.get(url).json()
   "filenames": "[u'/test.txt', '/api.txt']",
   "created": "2015-07-13T08:49:03Z",
   "updated": "2015-07-13T08:49:04Z",
-  "vhost": "http://my.cloakfusion.com/api/v1/vhosts/1/"
+  "vhost": "https://my.cloakfusion.com/api/v1/vhosts/1/"
 }
 
 ```
@@ -703,12 +703,12 @@ traffic = api.get(url).json()
         "quantity": "gb",
         "text": "1262.93 gb",
         "vhost": {
-            "domain_name": "static-cloakfusion.cdn.warpcache.com",
+            "domain_name": "example.cdn.warpcache.com",
             "id": 1,
             "name": "static",
             "origin_url": "http://o.cloakfusion.com",
             "state": "active",
-            "url": "http://my.cloakfusion.com/api/v1/vhosts/1/",
+            "url": "https://my.cloakfusion.com/api/v1/vhosts/1/",
             "properties": [],
             "profile": {
                 "name": "Standard",
@@ -726,7 +726,7 @@ traffic = api.get(url).json()
             "name": "mycompany",
             "origin_url": "http://o.example.com",
             "state": "active",
-            "url": "http://my.cloakfusion.com/api/v1/vhosts/2/",
+            "url": "https://my.cloakfusion.com/api/v1/vhosts/2/",
             "properties": [],
             "profile": {
                 "name": "Standard",
@@ -751,7 +751,7 @@ Lists all usage for all vhosts
     "quantity": "gb",
     "text": "1262.93 gb",
     "vhost": {
-        "domain_name": "static-cloakfusion.cdn.warpcache.com",
+        "domain_name": "example.cdn.warpcache.com",
         "id": 1,
         "name": "static",
         "origin_url": "http://o.cloakfusion.com",
