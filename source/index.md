@@ -248,7 +248,7 @@ origin_url | true | URL that references the origin. Where the CDN will get the c
 """ Assuming we keep our api and base_url
 variables from the authentication example: """
 
-url = base_url + 'vhost_property/'
+url = base_url + 'vhostproperty/'
 new_vhost = api.get(url).json()
 ```
 
@@ -283,7 +283,7 @@ curl "/api/v1/vhosts/" \
 
 List of all vhost property objects.
 
-`GET https://my.cloakfusion.com/api/v1/vhost_property/`
+`GET https://my.cloakfusion.com/api/v1/vhostproperty/`
 
 ## GET
 
@@ -293,13 +293,13 @@ List of all vhost property objects.
 variables from the authentication example: """
 
 vhost_property_id = 1
-url = base_url + 'vhost_property/' + vhost_property_id
+url = base_url + 'vhostproperty/' + vhost_property_id
 new_vhost = api.get(url).json()
 ```
 
 ```shell
 # With shell, you can just pass the correct header with each request
-curl "/api/v1/vhost_property/1" \
+curl "/api/v1/vhostproperty/1" \
   -H "Authorization: YOUR_API_TOKEN" \
 ```
 
@@ -320,9 +320,9 @@ curl "/api/v1/vhost_property/1" \
 
 Show vhost property object for vhost id `id`.
 
-`GET https://my.cloakfusion.com/api/v1/vhost_property/` `id` /
+`GET https://my.cloakfusion.com/api/v1/vhostproperty/` `id` /
 
-## PUT
+## PATCH
 
 ```python
 
@@ -334,14 +334,14 @@ data = {
     'ttl': '300',
     'gzip': True
 }
-url = base_url + 'vhost_property/' + vhost_property_id
+url = base_url + 'vhostproperty/' + vhost_property_id
 
 vhost_property = api.put(url).json()
 ```
 
 ```shell
 # With shell, you can just pass the correct header with each request
-curl "/api/v1/vhost_property/1" \
+curl "/api/v1/vhostproperty/1" \
   -H "Authorization: YOUR_API_TOKEN" \
 ```
 
@@ -362,7 +362,7 @@ curl "/api/v1/vhost_property/1" \
 
 This method allows you to update vhosts properties.
 
-`PUT https://my.cloakfusion.com/api/v1/vhost_property/ ` `id` /
+`PATCH https://my.cloakfusion.com/api/v1/vhostproperty/ ` `id` /
 
 ### Query Parameters
 
