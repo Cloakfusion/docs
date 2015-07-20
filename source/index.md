@@ -27,8 +27,7 @@ For python examples we use requests library as http client to set up a session w
 Keyword | Definition
 ------- | -----------
 CDN | A Content Delivery Network. We use multiple to guarantee 100% uptime
-property | A 'vhost' for a domain name. E.g.: static.cdn.warpcache.com
-vhost | An entry in our multi-cdn solution for a domain name. E.g.: static.cdn.warpcache.com
+vhost / <br/>property | An entry in our multi-cdn solution for a domain name. E.g.: example.cdn.warpcache.com
 origin | The url that contains files that will be pulled & cached by CDN's. E.g. http://o.example.com
 domain name | The url which you can use to pull your files through the multi-cdn solution. E.g. http://cdn.example.com
 flush | API representation of a flush/purge request to connected CDN providers to clear cache for an object
@@ -705,7 +704,7 @@ traffic = api.get(url).json()
         "vhost": {
             "domain_name": "example.cdn.warpcache.com",
             "id": 1,
-            "name": "static",
+            "name": "example",
             "origin_url": "http://o.cloakfusion.com",
             "state": "active",
             "url": "https://my.cloakfusion.com/api/v1/vhosts/1/",
@@ -753,7 +752,7 @@ Lists all usage for all vhosts
     "vhost": {
         "domain_name": "example.cdn.warpcache.com",
         "id": 1,
-        "name": "static",
+        "name": "example",
         "origin_url": "http://o.cloakfusion.com",
         "state": "active",
         "url": "https://my.cloakfusion.com/api/v1/vhosts/1/",
