@@ -106,7 +106,7 @@ curl "/api/v1/vhosts/" \
 ```json
 [ { "domain_name" : "example.cdn.warpcache.com",
     "id" : 1,
-    "name" : "static_cloak",
+    "name" : "example",
     "origin_url" : "https://www.cloakfusion.com",
     "profile" : { "id" : 2,
         "name" : "Standard"
@@ -152,7 +152,7 @@ curl "/api/v1/vhosts/1" \
 ```json
 { "domain_name" : "example.cdn.warpcache.com",
   "id" : 1,
-  "name" : "static_cloak",
+  "name" : "example",
   "origin_url" : "https://www.cloakfusion.com",
   "profile" : { "id" : 2,
       "name" : "Standard"
@@ -185,9 +185,9 @@ variables from the authentication example: """
 url = base_url + 'vhost/'
 
 data = {
-    'domain_name': 'apidocs.cloakfusion.com',
-    'origin_url': 'https://storage.googleapis.com/api_docs/index.html',
-    'name': 'api'
+    'domain_name': 'another.example.com',
+    'origin_url': 'http://o.example.com/',
+    'name': 'another'
 }
 new_vhost = api.post(url, data=data).json()
 ```
@@ -203,10 +203,10 @@ curl "/api/v1/vhosts/" \
 
 ```json
 
-{ "domain_name" : "apidocs.cloakfusion.com",
+{ "domain_name" : "another.example.com",
   "id" : 2,
-  "name" : "api",
-  "origin_url" : "http://storage.cloakfusion.com/api_docs/index.html",
+  "name" : "another",
+  "origin_url" : "http://o.example.com",
   "profile" : { "id" : 2,
       "name" : "Standard"
     },
