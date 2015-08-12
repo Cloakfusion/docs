@@ -6,9 +6,6 @@ language_tabs:
   - shell
 
 
-includes:
-  - errors
-
 search: true
 ---
 
@@ -21,6 +18,16 @@ We have language bindings in Shell, and Python. You can view code examples in th
 Our API uses an API token or your login session from our management portal. You can find your Cloakfusion API key at our [portal](https://my.cloakfusion.com).
 
 For python examples we use requests library as http client to set up a session with the API.
+
+> API Endpoint
+
+```python
+https://my.cloakfusion.com/api/
+```
+
+```shell
+https://my.cloakfusion.com/api/
+```
 
 ### Glossary
 
@@ -45,7 +52,22 @@ format | json | true | If set , the result will be returned as JSON.
 format | api | false | If set , the result will be returned as HTML.
 format | xml | false | If set , the result will be returned as XML.
 
+### Errors
 
+Cloakfusion uses conventional HTTP response codes to indicate success or failure of an API request. In general, codes in the 2xx range indicate success, codes in the 4xx range indicate an error that resulted from the provided information (e.g. a required parameter was missing, etc.), and codes in the 5xx range indicate an error with Cloakfusion's servers.
+
+The Warpcache API has the following error codes:
+
+Error Code | Meaning
+---------- | -------
+400 - Bad Request | Often missing a parameter
+401 - Unauthorized | No valid API key provided
+403 - Forbidden | The resource requested is unavailable for the API key provided
+404 - Not Found | The specified resource doesn't exist
+405 - Method Not Allowed | Check the  HTTP method
+406 - Not Acceptable | The requested format isn't supported
+500 - Internal Server Error | We had a problem with our server
+503 - Service Unavailable | We're temporarially offline for maintanance
 
 # Authentication
 
@@ -75,7 +97,7 @@ For clients to authenticate, the token key should be included in the Authorizati
 You can get your Cloakfusion API key at our [portal](https://my.cloakfusion.com).
 
 <aside class="notice">
-You should replace <code>YOUR_API_TOKEN</code> with your personal API key of course.
+You should replace <code>YOUR_API_TOKEN</code> with your personal API key.
 </aside>
 
 
@@ -100,7 +122,7 @@ curl "/api/v1/vhosts/" \
   -H "Authorization: YOUR_API_TOKEN"
 ```
 
-> Example response:
+Example response:
 
 ```json
 [ { "domain_name" : "example.cdn.warpcache.com",
@@ -218,11 +240,11 @@ curl "/api/v1/vhosts/" \
 
 This method allows you to create vhosts.
 <aside class="notice">
-Note that vhost creation doesn't immediately return the cname record.<br/><br/>
-It may take up to <b>30 seconds</b> before you will get a cname in the vhost response.
+Note that vhost creation doesn't immediately return the CNAME record.<br/><br/>
+It may take up to <b>30 seconds</b> before you will get a CNAME in the vhost response.
 
 
-When a request for the vhost id(`2` in this case) doesn't yield a cname record, please contact support[at]cloakfusion.com and provide the vhost id, origin url and domain name.
+When a request for the vhost id(`2` in this case) doesn't yield a CNAME record, please contact support[at]cloakfusion.com and provide the vhost id, origin url and domain name.
 </aside>
 
 `POST https://my.cloakfusion.com/api/v1/vhosts/`
@@ -780,7 +802,4 @@ Parameter | Required | Description
 --------- | ------- | -----------
 start_date | false | Start date for fetching traffic usage. Format: dd-mm-yyyy
 end_date | false | End date for fetching traffic usage. Format: dd-mm-yyyy
-
-
-
 
