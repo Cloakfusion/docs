@@ -543,7 +543,7 @@ curl "/api/v1/flush/1" \
 ```
 
 This method allows you to create a flush request
-<aside class="success">Don't forget to set the `Content-Type` header to `application/json`</aside>
+<aside class="notice">Don't forget to set the `Content-Type` header to `application/json`</aside>
 
 `POST https://my.cloakfusion.com/api/v1/flush/`
 
@@ -782,7 +782,7 @@ Retrieve usage for one vhost
 
 `GET https://my.cloakfusion.com/api/v1/traffic/` `id` /
 
-<aside class="success">
+<aside class="notice">
 Where id = vhost id
 </aside>
 
