@@ -29,7 +29,7 @@ https://my.cloakfusion.com/api/
 https://my.cloakfusion.com/api/
 ```
 
-### Glossary
+## Glossary
 
 Keyword | Definition
 ------- | -----------
@@ -40,7 +40,7 @@ domain name | The url which you can use to pull your files through the multi-cdn
 flush | API representation of a flush/purge request to connected CDN providers to clear cache for an object
 purge | See flush
 
-### Formatting
+## Formatting
 
 API formatting can be manipulated through the format query parameter.
 
@@ -52,7 +52,7 @@ format | json | true | If set , the result will be returned as JSON.
 format | api | false | If set , the result will be returned as HTML.
 format | xml | false | If set , the result will be returned as XML.
 
-### Errors
+## Errors
 
 Cloakfusion uses conventional HTTP response codes to indicate success or failure of an API request. In general, codes in the 2xx range indicate success, codes in the 4xx range indicate an error that resulted from the provided information (e.g. a required parameter was missing, etc.), and codes in the 5xx range indicate an error with Cloakfusion's servers.
 
