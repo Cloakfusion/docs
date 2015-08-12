@@ -17,7 +17,7 @@ We have language bindings in Shell, and Python. You can view code examples in th
 
 Our API uses an API token or your login session from our management portal. You can find your Cloakfusion API key at our [portal](https://my.cloakfusion.com).
 
-For python examples we use requests library as http client to set up a session with the API.
+For Python examples we use requests library as http client to set up a session with the API.
 
 ## Glossary
 
@@ -44,7 +44,7 @@ format | xml | false | If set , the result will be returned as XML.
 
 ## Errors
 
-Cloakfusion uses conventional HTTP response codes to indicate success or failure of an API request. In general, codes in the 2xx range indicate success, codes in the 4xx range indicate an error that resulted from the provided information (e.g. a required parameter was missing, etc.), and codes in the 5xx range indicate an error with Cloakfusion's servers.
+Cloakfusion uses conventional HTTP response codes to indicate success or failure of an API request. In general, codes in the 2xx range indicate success, codes in the 4xx range indicate an error that resulted from the provided information (e.g. a required parameter was missing), and codes in the 5xx range indicate an error with Cloakfusion's servers.
 
 The Warpcache API has the following error codes:
 
