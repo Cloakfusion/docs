@@ -19,16 +19,6 @@ Our API uses an API token or your login session from our management portal. You 
 
 For python examples we use requests library as http client to set up a session with the API.
 
-> API Endpoint
-
-```python
-https://my.cloakfusion.com/api/
-```
-
-```shell
-https://my.cloakfusion.com/api/
-```
-
 ## Glossary
 
 Keyword | Definition
