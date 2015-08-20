@@ -790,6 +790,6 @@ Where id = vhost id
 
 Parameter | Required | Default | Description
 --------- | -------- | -------- | -----------
-start_date | false | First day of this month | Start date for fetching traffic usage. Format: dd-mm-yyyy
+start_date | false | First day of the current month | Start date for fetching traffic usage. Format: dd-mm-yyyy
 end_date | false | Today | End date for fetching traffic usage. Format: dd-mm-yyyy
 
