@@ -788,8 +788,8 @@ Where id = vhost id
 
 ### Query Parameters
 
-Parameter | Required | Description
---------- | ------- | -----------
-start_date | false | Start date for fetching traffic usage. Format: dd-mm-yyyy
-end_date | false | End date for fetching traffic usage. Format: dd-mm-yyyy
+Parameter | Required | Default | Description
+--------- | -------- | -------- | -----------
+start_date | false | First day of this month | Start date for fetching traffic usage. Format: dd-mm-yyyy
+end_date | false | Today | End date for fetching traffic usage. Format: dd-mm-yyyy
 
